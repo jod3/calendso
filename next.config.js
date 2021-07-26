@@ -15,7 +15,9 @@ if (!process.env.EMAIL_FROM) {
 }
 if (process.env.BASE_URL) {
   process.env.NEXTAUTH_URL = process.env.BASE_URL + "/api/auth";
-  console.log("Test");
+  console.warn("BASE_URL from .env", process.env.BASE_URL);
+} else {
+  console.warn("BASE_URL NOT DEFINED");
 }
 
 const validJson = (jsonString) => {
