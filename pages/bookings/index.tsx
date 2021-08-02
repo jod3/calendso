@@ -5,6 +5,7 @@ import Shell from "../../components/Shell";
 import { useRouter } from "next/router";
 
 export default function Bookings({ bookings }) {
+  console.log("All good until here");
   const [, loading] = useSession();
   const router = useRouter();
 
@@ -42,6 +43,11 @@ export default function Bookings({ bookings }) {
                       <th
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Person
                       </th>
                       <th
@@ -65,6 +71,7 @@ export default function Bookings({ bookings }) {
                       .concat(bookings.filter((booking) => booking.confirmed || booking.rejected))
                       .map((booking) => (
                         <tr key={booking.id}>
+                          <td>{booking.startTime.toString()}</td>
                           <td
                             className={
                               "px-6 py-4 whitespace-nowrap" + (booking.rejected ? " line-through" : "")
@@ -165,6 +172,7 @@ export async function getServerSideProps(context) {
       confirmed: true,
       rejected: true,
       id: true,
+      startTime: true,
     },
     orderBy: {
       startTime: "desc",
